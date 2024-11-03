@@ -1,3 +1,4 @@
+import { Link, router } from "expo-router";
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -50,33 +51,38 @@ const ModernPDFLibrary: React.FC<{ pdfFiles?: PDFFile[] }> = ({ pdfFiles }) => {
       style={styles.card}
       onPress={() => {
         // Implement PDF viewing logic here
+        router.push("/view-pdf");
         console.log("View PDF:", item.fileUrl);
       }}
     >
-      <Image
-        source={{ uri: thumbnails[item._id] }}
-        style={styles.thumbnail}
-        resizeMode="cover"
-      />
-      <View style={styles.gradient}>
-        <Text style={styles.fileName} numberOfLines={2}>
-          {item.fileName}
-        </Text>
-        <Text style={styles.fileInfo}>
-          {formatFileSize(item.fileSize)} • {formatDate(item.uploadDate)}
-        </Text>
-      </View>
-      <View style={styles.iconContainer}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => {
-            // Implement PDF download logic here
-            console.log("Download PDF:", item.fileUrl);
-          }}
-        >
-          <Icon name="download" size={20} color="#FFFFFF" />
-        </TouchableOpacity>
-      </View>
+      <Link href={`/view-pdf`}>View PDF</Link>
+
+      <>
+        <Image
+          source={{ uri: thumbnails[item._id] }}
+          style={styles.thumbnail}
+          resizeMode="cover"
+        />
+        <View style={styles.gradient}>
+          <Text className="font-semibold text-3xl text-white" numberOfLines={2}>
+            {item.fileName}
+          </Text>
+          <Text style={styles.fileInfo}>
+            {formatFileSize(item.fileSize)} • {formatDate(item.uploadDate)}
+          </Text>
+        </View>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => {
+              // Implement PDF download logic here
+              console.log("Download PDF:", item.fileUrl);
+            }}
+          >
+            <Icon name="download" size={20} color="#FFFFFF" />
+          </TouchableOpacity>
+        </View>
+      </>
     </TouchableOpacity>
   );
 

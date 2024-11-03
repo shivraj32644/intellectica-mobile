@@ -12,7 +12,7 @@ export const useUserLibrary = () => {
     mutationFn: async (payload: any) => {
       console.log("payload", JSON.stringify(payload, null, 2));
       const response = await axios.post<IUploadFileResponse>(
-        `http://192.168.1.6:8888/api/user-library/upload-file-for-native`,
+        `http://192.168.1.6:8888/api/user-library/upload-file`,
         payload
       );
       console.log("response", response);

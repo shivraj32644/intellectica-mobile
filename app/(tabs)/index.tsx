@@ -49,7 +49,8 @@ const HomeScreen: React.FC = () => {
       const response = await fetch(file.uri);
       const blob = await response.blob();
 
-      formData.append("file", blob, file.name);
+      formData.append("pdf", blob, file.name);
+      formData.append("userId", "670a56913770a95eed49fd5a");
       useUploadFiles.mutate(formData, {
         onSuccess: (data) => {
           console.log("data", data);
